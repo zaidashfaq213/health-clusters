@@ -890,25 +890,30 @@ function getSectionName($sections, $section_id) {
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container container">
-            <div class="logo-circle">
-                <img src="assets/images/logo.png" alt="Northern Borders Health Cluster Logo">
-            </div>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="index.php#hospitals">Hospitals</a></li>
-                <li><a href="index.php#health-centers">Health Centers</a></li>
-                 <?php if ($user['role'] === 'manager'): ?>
-                      <li><a href="messages.php" class="hover:underline">Chat</a></li>
-                  <?php endif; ?>
-                <li><a href="logout.php" class="btn">Logout</a></li>
-            </ul>
+  <nav class="navbar">
+    <div class="nav-container container">
+        <div class="logo-circle">
+            <img src="assets/images/logo.png" alt="Northern Borders Health Cluster Logo">
         </div>
-    </nav>
+        <div class="toggle-buttons">
+            <div class="menu-toggle">
+              
+            </div>
+            <div class="sidebar-toggle">
+                <i class="fas fa-user-cog"></i> <!-- Icon for sidebar toggle -->
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.php">Home</a></li>
+            <li><a href="index.php#hospitals">Hospitals</a></li>
+            <li><a href="index.php#health-centers">Health Centers</a></li>
+            <?php if ($user['role'] === 'manager'): ?>
+                <li><a href="messages.php" class="hover:underline">Chat</a></li>
+            <?php endif; ?>
+            <li><a href="logout.php" class="btn">Logout</a></li>
+        </ul>
+    </div>
+</nav>
 
     <!-- Main Container -->
     <div class="main-container">
@@ -1465,6 +1470,42 @@ function getSectionName($sections, $section_id) {
 </footer>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Navbar and Sidebar Toggle (from hospital.php)
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            sidebar.classList.remove('active');
+            sidebarToggle.classList.remove('active');
+        });
+    }
+
+    if (sidebarToggle && sidebar) {
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            sidebarToggle.classList.toggle('active');
+            navMenu.classList.remove('active');
+            menuToggle.classList.remove('active');
+        });
+    }
+
+    document.addEventListener('click', (e) => {
+        if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+            sidebar.classList.remove('active');
+            sidebarToggle.classList.remove('active');
+        }
+        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            navMenu.classList.remove('active');
+            menuToggle.classList.remove('active');
+        }
+    });
+
     // Tab Navigation
     document.querySelectorAll('.tab-btn').forEach(button => {
         button.addEventListener('click', () => {
@@ -1475,7 +1516,7 @@ function getSectionName($sections, $section_id) {
         });
     });
 
-    // Sidebar Buttons
+    // Sidebar Buttons (Close Sidebar on Click)
     document.querySelectorAll('.action-btn[data-section]').forEach(button => {
         button.addEventListener('click', () => {
             const sectionId = button.dataset.section;
@@ -1486,6 +1527,10 @@ function getSectionName($sections, $section_id) {
             document.querySelector('.tab-btn[data-tab="forms"]').classList.add('active');
             document.getElementById(sectionId).style.display = 'block';
             document.getElementById('forms-section').style.display = 'block';
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('active');
+                sidebarToggle.classList.remove('active');
+            }
         });
     });
 
@@ -1511,20 +1556,17 @@ function getSectionName($sections, $section_id) {
                     <?php else: ?>
                         subSectionsDiv.style.display = 'none';
                     <?php endif; ?>
-                    // Show extinguisher list only for Fire Safety (ID 5)
                     if (sectionId == '5') {
                         document.getElementById('extinguisher-list').style.display = 'block';
                     } else {
                         document.getElementById('extinguisher-list').style.display = 'none';
                     }
-                    // Filter topics
                     document.querySelectorAll('.topic-card').forEach(card => {
                         card.style.display = card.dataset.sectionId == sectionId ? 'block' : 'none';
                     });
                     document.getElementById('topics-title').textContent = '<?php echo htmlspecialchars($section['name'], ENT_QUOTES, 'UTF-8'); ?> Topics';
                 }
             <?php endforeach; ?>
-            // Activate first sub-section if available
             const firstSubSection = subSectionsDiv.querySelector('.sub-section-btn');
             if (firstSubSection) {
                 firstSubSection.classList.add('active');
@@ -1546,7 +1588,6 @@ function getSectionName($sections, $section_id) {
         document.querySelectorAll('.topic-card').forEach(card => {
             card.style.display = card.dataset.sectionId == subSectionId ? 'block' : 'none';
         });
-        // Show extinguisher list only for Fire Safety (ID 5)
         if (subSectionId == '5') {
             document.getElementById('extinguisher-list').style.display = 'block';
         } else {
@@ -1643,6 +1684,7 @@ function getSectionName($sections, $section_id) {
             notificationList.classList.toggle('active');
         });
     }
+});
 </script>
 </body>
-</html>
+</html> 
