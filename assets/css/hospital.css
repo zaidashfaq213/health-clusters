@@ -158,6 +158,25 @@ p {
     z-index: 900;
     transition: transform 0.3s ease;
 }
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+    display: none; /* Hidden on large screens */
+    font-size: 1.8rem;
+    color: #ffffff;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    transform: scale(1.2);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .sidebar-toggle {
+        display: block; /* Show toggle on small screens */
+    }
+}
 
 /* Profile Section */
 .profile-section {

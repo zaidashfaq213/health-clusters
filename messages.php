@@ -107,6 +107,7 @@ foreach ($managers as $manager) {
         .message a.file-link { color: #075e54; text-decoration: underline; display: flex; align-items: center; }
         .message a.file-link i { margin-right: 6px; }
         .message-timestamp { font-size: 10px; color: #667781; margin-top: 4px; text-align: right; }
+        .message-sender { font-size: 14px; font-weight: 700; color: #075e54; margin-bottom: 6px; text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.1); letter-spacing: 0.5px; }
         .chat-input { padding: 12px 16px; background: #f0f2f5; border-top: 1px solid #e0e0e0; }
         .chat-input form { display: flex; align-items: center; background: #fff; border-radius: 20px; padding: 8px; }
         .chat-input input[type="text"] { flex: 1; padding: 8px; border: none; outline: none; font-size: 14px; }
@@ -209,9 +210,11 @@ foreach ($managers as $manager) {
                     content += `<a href="${message.file_path}" class="file-link" target="_blank"><i class="fas fa-file"></i>${message.file_path.split('/').pop()}</a>`;
                 }
             }
+            const senderName = message.sender_id == userId ? 'You' : message.sender_username;
             div.innerHTML = `
+                <p class="message-sender">${senderName}</p>
                 ${content}
-                <p class="message-timestamp">${new Date(message.created_at).toLocaleTimeString()}</p>
+                <p class="message-timestamp">${new Date(message.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
             `;
             chatMessages.appendChild(div);
             chatMessages.scrollTop = chatMessages.scrollHeight;

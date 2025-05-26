@@ -11,7 +11,7 @@ require_once './includes/config.php';
     <title>Education - Northern Borders Health Cluster</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/edu.css">
 </head>
 <body>
@@ -44,22 +44,22 @@ require_once './includes/config.php';
         <section class="education-section" data-aos="fade-up" data-aos-duration="1000">
             <div class="container">
                 <h1>Education & Training</h1>
-                <p class="section-intro">Explore our educational resources to learn life-saving skills and safety procedures.</p>
+                <p class="section-intro">Learn critical safety skills with our expertly designed resources.</p>
 
                 <!-- Course Announcements -->
                 <div class="courses" data-aos="fade-up" data-aos-delay="200">
-                    <h2>Course Announcements</h2>
+                    <h2>Upcoming Courses</h2>
                     <div class="course-list">
-                        <div class="course-item">
+                        <div class="course-item" data-aos="fade-up" data-aos-delay="300">
                             <h3>Fire Safety Training</h3>
-                            <p>Join our upcoming workshop on using fire extinguishers and fire safety protocols.</p>
+                            <p>Master fire extinguisher use and safety protocols.</p>
                             <p><strong>Date:</strong> June 10, 2025</p>
                             <p><strong>Location:</strong> North Medical Tower Hospital</p>
                             <a href="signup.php" class="btn">Register Now</a>
                         </div>
-                        <div class="course-item">
+                        <div class="course-item" data-aos="fade-up" data-aos-delay="400">
                             <h3>Emergency Evacuation Training</h3>
-                            <p>Learn how to safely evacuate during emergencies with our expert-led course.</p>
+                            <p>Learn safe evacuation techniques with expert guidance.</p>
                             <p><strong>Date:</strong> June 15, 2025</p>
                             <p><strong>Location:</strong> Rafha General Hospital</p>
                             <a href="signup.php" class="btn">Register Now</a>
@@ -69,80 +69,75 @@ require_once './includes/config.php';
 
                 <!-- Promotional Media -->
                 <div class="promo-media" data-aos="fade-up" data-aos-delay="400">
-                    <h2>Educational Media</h2>
+                    <h2>Educational Resources</h2>
                     <div class="media-grid">
                         <!-- Fire Extinguisher PASS Guide -->
-                        <div class="media-item pass-guide" id="pass-guide">
-                            <h3>How to Use a Fire Extinguisher (PASS Technique)</h3>
-                            <div class="pass-container">
-                                <div class="pass-image" data-aos="zoom-in" data-aos-delay="100">
-                                    <img src="/assets/images/ex.jpg" alt="Fire Extinguisher">
-                                    
-                                </div> 
-                                <div class="pass-steps">
-                                    <div class="pass-step" data-aos="pop-in" data-aos-delay="200">
-                                        <i class="fas fa-hand-paper pass-icon"></i>
-                                        <h4>Pull / سحب</h4>
-                                        <p>Pull pin to unlock.</p>
-                                        <p class="arabic">اسحب الدبوس لفك القفل.</p>
-                                    </div> 
-                                    <div class="pass-step" data-aos="pop-in" data-aos-delay="300">
-                                        <i class="fas fa-crosshairs pass-icon"></i>
-                                        <h4>Aim / توجيه</h4>
-                                        <p>Aim at fire’s base.</p>
-                                        <p class="arabic">وجّه إلى قاعدة النار.</p>
-                                    </div>
-                                    <div class="pass-step" data-aos="pop-in" data-aos-delay="400">
-                                        <i class="fas fa-hand-rock pass-icon"></i>
-                                        <h4>Squeeze / اضغط</h4>
-                                        <p>Squeeze to release.</p>
-                                        <p class="arabic">اضغط لإطلاق المادة.</p>
-                                    </div>
-                                    <div class="pass-step" data-aos="pop-in" data-aos-delay="500">
-                                        <i class="fas fa-arrows-alt-h pass-icon"></i>
-                                        <h4>Sweep / امسح</h4>
-                                        <p>Sweep side to side.</p>
-                                        <p class="arabic">اكتسح من جانب لآخر.</p>
-                                    </div>
+                        <div class="media-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="media-content">
+                                <div class="media-image">
+                                    <img src="/assets/images/trainign.jpg" alt="Fire Extinguisher">
                                 </div>
+                                <h3>PASS Technique</h3>
+                                <div class="media-steps">
+                                    <p data-aos="fade-up" data-aos-delay="200"><i class="fas fa-hand-paper"></i> <strong>Pull / سحب</strong>: Unlock the pin. <span class="arabic">اسحب الدبوس لفك القفل.</span></p>
+                                    <p data-aos="fade-up" data-aos-delay="300"><i class="fas fa-crosshairs"></i> <strong>Aim / توجيه</strong>: Target the fire’s base. <span class="arabic">وجّه إلى قاعدة النار.</span></p>
+                                    <p data-aos="fade-up" data-aos-delay="400"><i class="fas fa-hand-rock"></i> <strong>Squeeze / اضغط</strong>: Release the agent. <span class="arabic">اضغط لإطلاق المادة.</span></p>
+                                    <p data-aos="fade-up" data-aos-delay="500"><i class="fas fa-arrows-alt-h"></i> <strong>Sweep / امسح</strong>: Move side to side. <span class="arabic">اكتسح من جانب لآخر.</span></p>
+                                </div>
+                                <a href="signup.php" class="btn">Learn More</a>
                             </div>
                         </div>
                         <!-- Fire Extinguisher Training -->
-                        <div class="media-item training-guide" id="training-guide">
-                            <h3>Fire Extinguisher Training Conducted</h3>
-                            <div class="training-container">
-                                <div class="training-image" data-aos="zoom-in" data-aos-delay="100">
-                                    <img src="/assets/images/trainign.jpg" alt="Fire Extinguisher Training">
+                        <div class="media-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="media-content">
+                                <div class="media-image">
+                                    <img src="/assets/images/training.jpg" alt="Fire Extinguisher Training">
                                 </div>
-                                <p>We conducted fire extinguisher training for employees.</p>
-                                <p class="arabic">أجرينا تدريبًا على استخدام طفايات الحريق للموظفين.</p>
-                                <div class="certificate-link" data-aos="fade-up" data-aos-delay="200">
-                                    <a href="/assets/images/YASIR SALEH ALREHAILI.pdf" class="btn certificate-btn" download>
-                                        <i class="fas fa-file-pdf"></i> Download Certificate
-                                    </a>
-                                    <p class="arabic">تحميل الشهادة</p>
+                                <h3>Fire Safety Training</h3>
+                                <div class="media-steps">
+                                    <p data-aos="fade-up" data-aos-delay="200"><i class="fas fa-fire-extinguisher"></i> <strong>Learn / تعلم</strong>: Operate extinguishers safely. <span class="arabic">تشغيل طفايات الحريق بأمان.</span></p>
+                                    <p data-aos="fade-up" data-aos-delay="300"><i class="fas fa-shield-alt"></i> <strong>Protect / حماية</strong>: Follow safety protocols. <span class="arabic">اتباع بروتوكولات السلامة.</span></p>
+                                    <p data-aos="fade-up" data-aos-delay="400"><i class="fas fa-chalkboard-teacher"></i> <strong>Practice / ممارسة</strong>: Train in real scenarios. <span class="arabic">التدرب في سيناريوهات حقيقية.</span></p>
+                                    <p data-aos="fade-up" data-aos-delay="500"><i class="fas fa-certificate"></i> <strong>Certify / شهادة</strong>: Earn a certificate. <span class="arabic">الحصول على شهادة.</span></p>
                                 </div>
+                                <a href="/assets/images/YASIR SALEH ALREHAILI.pdf" class="btn certificate-btn" download>
+                                    <i class="fas fa-file-pdf"></i> Download Certificate
+                                </a>
                             </div>
                         </div>
-                        <!-- Fire Extinguisher Animation -->
-                        <div class="media-item" id="fire-extinguisher">
-                            <h3>How to Use a Fire Extinguisher</h3>
-                            <video controls poster="/assets/images/fire-extinguisher-poster.jpg">
-                                <source src="/assets/videos/fire-extinguisher.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <p>Learn the PASS technique with this animated guide.
-                                Learn how to use an Extenguisher and be safe.
-                            </p>
+                        <!-- Fire Extinguisher Guide -->
+                        <div class="media-item highlight-card" data-aos="fade-up" data-aos-delay="300">
+                            <div class="media-content">
+                                <div class="media-image video-preview">
+                                    <img src="/assets/images/ex.jpg" alt="Fire Extinguisher Guide">
+                                    <i class="fas fa-play play-icon"></i>
+                                </div>
+                                <h3>Fire Extinguisher Guide</h3>
+                                <div class="media-steps">
+                                    <p data-aos="fade-up" data-aos-delay="200"><i class="fas fa-video"></i> <strong>Watch / مشاهدة</strong>: View animated guide. <span class="arabic">مشاهدة الدليل المتحرك.</span></p>
+                                    <p data-aos="fade-up" data-aos-delay="300"><i class="fas fa-fire"></i> <strong>Learn / تعلم</strong>: Master PASS technique. <span class="arabic">إتقان تقنية PASS.</span></p>
+                                    <p data-aos="fade-up" data-aos-delay="400"><i class="fas fa-check-circle"></i> <strong>Apply / تطبيق</strong>: Use in emergencies. <span class="arabic">الاستخدام في حالات الطوارئ.</span></p>
+                                    <p data-aos="fade-up" data-aos-delay="500"><i class="fas fa-play-circle"></i> <strong>Share / مشاركة</strong>: Spread safety knowledge. <span class="arabic">نشر المعرفة بالسلامة.</span></p>
+                                </div>
+                                <a href="/assets/videos/fire-extinguisher.mp4" class="btn video-btn">Watch Video</a>
+                            </div>
                         </div>
                         <!-- Evacuation Plan -->
-                        <div class="media-item" id="evacuation-plan">
-                            <h3>Evacuation plan RACE</h3>
-                            <img src="/assets/images/evacuation.jpg" alt="Emergency Evacuation Plan">
-                            <p>Understand key steps for safe evacuation during emergencies.</p>
-                            <a href="/assets/files/evacuation-plan.pdf" class="btn" download>Download Plan</a>
+                        <div class="media-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="media-content">
+                                <div class="media-image">
+                                    <img src="/assets/images/evacuation.jpg" alt="Emergency Evacuation Plan">
+                                </div>
+                                <h3>RACE Evacuation Plan</h3>
+                                <div class="media-steps">
+                                    <p data-aos="fade-up" data-aos-delay="200"><i class="fas fa-running"></i> <strong>Rescue / إنقاذ</strong>: Save those in danger. <span class="arabic">إنقاذ الأشخاص في خطر.</span></p>
+                                    <p data-aos="fade-up" data-aos-delay="300"><i class="fas fa-bell"></i> <strong>Alert / تنبيه</strong>: Sound the alarm. <span class="arabic">إطلاق الإنذار.</span></p>
+                                    <p data-aos="fade-up" data-aos-delay="400"><i class="fas fa-door-closed"></i> <strong>Contain / احتواء</strong>: Limit the hazard. <span class="arabic">الحد من المخاطر.</span></p>
+                                    <p data-aos="fade-up" data-aos-delay="500"><i class="fas fa-sign-out-alt"></i> <strong>Evacuate / إخلاء</strong>: Exit safely. <span class="arabic">الخروج بأمان.</span></p>
+                                </div>
+                                <a href="/assets/files/evacuation-plan.pdf" class="btn" download>Download Plan</a>
+                            </div>
                         </div>
-                      
                     </div>
                 </div>
             </div>
@@ -155,20 +150,8 @@ require_once './includes/config.php';
             <p>© 2025 Northern Borders Health Cluster. All Rights Reserved.</p>
         </div>
     </footer>
-         
 
-    <!-- JavaScript code-->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Toggle mobile menu
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            menuToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-            });
-        });
-    </script>
-    <!-- AOS JS -->
+    <!-- JavaScript -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init({
@@ -176,6 +159,15 @@ require_once './includes/config.php';
             offset: 100,
             duration: 800,
             easing: 'ease-in-out'
+        });
+
+        // Toggle mobile menu
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
         });
     </script>
 </body>

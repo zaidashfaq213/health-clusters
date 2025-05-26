@@ -279,7 +279,7 @@ foreach ($hospital_names as $id => $name) {
                             ?>
                         </div>
                     </div>
-                    <!-- Turaif -->
+                    <!-- Turaif hospital -->
                     <div class="submenu-item">
                         <div class="submenu-title" aria-expanded="false" aria-controls="turaif-health-submenu">
                             <span>Turaif</span>

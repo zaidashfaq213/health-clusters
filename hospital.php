@@ -841,25 +841,30 @@ function getSectionName($sections, $section_id) {
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container container">
-            <div class="logo-circle">
-                <img src="assets/images/logo.png" alt="Northern Borders Health Cluster Logo">
-            </div>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="index.php#hospitals">Hospitals</a></li>
-                <li><a href="index.php#health-centers">Health Centers</a></li>
-                 <?php if ($user['role'] === 'manager'): ?>
-                    <li><a href="messages.php" class="hover:underline">Chat</a></li>
-                <?php endif; ?>
-                <li><a href="logout.php" class="btn">Logout</a></li>
-            </ul>
+   <nav class="navbar">
+    <div class="nav-container container">
+        <div class="logo-circle">
+            <img src="assets/images/logo.png" alt="Northern Borders Health Cluster Logo">
         </div>
-    </nav>
+        <div class="toggle-buttons">
+            <div class="menu-toggle">
+              
+            </div>
+            <div class="sidebar-toggle">
+                <i class="fas fa-user-cog"></i> <!-- Icon for sidebar toggle -->
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.php">Home</a></li>
+            <li><a href="index.php#hospitals">Hospitals</a></li>
+            <li><a href="index.php#health-centers">Health Centers</a></li>
+            <?php if ($user['role'] === 'manager'): ?>
+                <li><a href="messages.php" class="hover:underline">Chat</a></li>
+            <?php endif; ?>
+            <li><a href="logout.php" class="btn">Logout</a></li>
+        </ul>
+    </div>
+</nav>
 
     <!-- Main Container -->
     <div class="main-container">
@@ -1338,192 +1343,233 @@ function getSectionName($sections, $section_id) {
 
     <!-- JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Tab Toggling
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            const tabContents = document.querySelectorAll('.tab-content');
+       document.addEventListener('DOMContentLoaded', () => {
+    // Navbar Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
 
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    button.classList.add('active');
-                    document.getElementById(button.dataset.tab).classList.add('active');
-                });
-            });
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            // Close sidebar when navbar is toggled
+            sidebar.classList.remove('active');
+            sidebarToggle.classList.remove('active');
+        });
+    }
 
-            // Section Toggling
-            const buttons = document.querySelectorAll('.action-btn[data-section]');
-            const formsSection = document.getElementById('forms-section');
-            const dashboardSection = document.getElementById('dashboard-section');
-            const formContents = document.querySelectorAll('.form-content');
+    // Sidebar Toggle
+    if (sidebarToggle && sidebar) {
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            sidebarToggle.classList.toggle('active');
+            // Close navbar when sidebar is toggled
+            navMenu.classList.remove('active');
+            menuToggle.classList.remove('active');
+        });
+    }
 
-            buttons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const section = button.dataset.section;
-                    buttons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
+    // Close sidebar and navbar when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+            sidebar.classList.remove('active');
+            sidebarToggle.classList.remove('active');
+        }
+        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            navMenu.classList.remove('active');
+            menuToggle.classList.remove('active');
+        }
+    });
 
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
+    // Tab Toggling
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
 
-                    if (section === 'dashboard') {
-                        document.querySelector('.tab-btn[data-tab="details"]').classList.add('active');
-                        document.getElementById('details').classList.add('active');
-                    } else {
-                        document.querySelector('.tab-btn[data-tab="forms"]').classList.add('active');
-                        document.getElementById('forms').classList.add('active');
-                        formsSection.style.display = 'block';
-                        formContents.forEach(content => {
-                            content.style.display = content.id === section ? 'block' : 'none';
-                        });
-                    }
-                });
-            });
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            document.getElementById(button.dataset.tab).classList.add('active');
+            // Close sidebar when switching tabs
+            sidebar.classList.remove('active');
+            sidebarToggle.classList.remove('active');
+        });
+    });
 
-            // Menu Toggle
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            if (menuToggle && navMenu) {
-                menuToggle.addEventListener('click', () => {
-                    navMenu.classList.toggle('active');
+    // Section Toggling
+    const buttons = document.querySelectorAll('.action-btn[data-section]');
+    const formsSection = document.getElementById('forms-section');
+    const formContents = document.querySelectorAll('.form-content');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const section = button.dataset.section;
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            if (section === 'dashboard') {
+                document.querySelector('.tab-btn[data-tab="details"]').classList.add('active');
+                document.getElementById('details').classList.add('active');
+                formsSection.style.display = 'none';
+            } else {
+                document.querySelector('.tab-btn[data-tab="forms"]').classList.add('active');
+                document.getElementById('forms').classList.add('active');
+                formsSection.style.display = 'block';
+                formContents.forEach(content => {
+                    content.style.display = content.id === section ? 'block' : 'none';
                 });
             }
+            // Close sidebar when a section is selected
+            sidebar.classList.remove('active');
+            sidebarToggle.classList.remove('active');
+        });
+    });
 
-            // Table Management
-            let headerCount = 2;
-            function addHeader() {
-                const headersDiv = document.querySelector('.table-headers');
+    // Table Management
+    let headerCount = 2;
+    function addHeader() {
+        const headersDiv = document.querySelector('.table-headers');
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'table_headers[]';
+        input.placeholder = `Header ${headerCount + 1}`;
+        input.className = 'table-header-input';
+        headersDiv.appendChild(input);
+        headerCount++;
+        updateTableRows();
+    }
+
+    let rowCount = 1;
+    function addRow() {
+        const rowsDiv = document.getElementById('table-rows');
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'table-row';
+        for (let i = 0; i < headerCount; i++) {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = `table_data[${rowCount}][]`;
+            input.placeholder = `Cell ${i + 1}`;
+            input.className = 'table-cell-input';
+            rowDiv.appendChild(input);
+        }
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'action-btn small-btn delete-btn';
+        removeBtn.textContent = 'Remove';
+        removeBtn.onclick = () => removeRow(removeBtn);
+        rowDiv.appendChild(removeBtn);
+        rowsDiv.appendChild(rowDiv);
+        rowCount++;
+    }
+
+    function removeRow(btn) {
+        if (rowCount > 1) {
+            btn.parentElement.remove();
+            rowCount--;
+        }
+    }
+
+    function updateTableRows() {
+        const rowsDiv = document.getElementById('table-rows');
+        const rows = rowsDiv.getElementsByClassName('table-row');
+        for (let i = 0; i < rows.length; i++) {
+            const inputs = rows[i].getElementsByClassName('table-cell-input');
+            while (inputs.length > headerCount) {
+                inputs[inputs.length - 1].remove();
+            }
+            while (inputs.length < headerCount) {
                 const input = document.createElement('input');
                 input.type = 'text';
-                input.name = 'table_headers[]';
-                input.placeholder = `Header ${headerCount + 1}`;
-                input.className = 'table-header-input';
-                headersDiv.appendChild(input);
-                headerCount++;
-                updateTableRows();
+                input.name = `table_data[${i}][]`;
+                input.placeholder = `Cell ${inputs.length + 1}`;
+                input.className = 'table-cell-input';
+                rows[i].insertBefore(input, rows[i].lastElementChild);
             }
+        }
+    }
 
-            let rowCount = 1;
-            function addRow() {
-                const rowsDiv = document.getElementById('table-rows');
-                const rowDiv = document.createElement('div');
-                rowDiv.className = 'table-row';
-                for (let i = 0; i < headerCount; i++) {
-                    const input = document.createElement('input');
-                    input.type = 'text';
-                    input.name = `table_data[${rowCount}][]`;
-                    input.placeholder = `Cell ${i + 1}`;
-                    input.className = 'table-cell-input';
-                    rowDiv.appendChild(input);
-                }
-                const removeBtn = document.createElement('button');
-                removeBtn.type = 'button';
-                removeBtn.className = 'action-btn small-btn delete-btn';
-                removeBtn.textContent = 'Remove';
-                removeBtn.onclick = () => removeRow(removeBtn);
-                rowDiv.appendChild(removeBtn);
-                rowsDiv.appendChild(rowDiv);
-                rowCount++;
-            }
+    // Section Navigation
+    document.querySelectorAll('.section-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const sectionId = parseInt(button.dataset.sectionId);
+            document.querySelectorAll('.section-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
-            function removeRow(btn) {
-                if (rowCount > 1) {
-                    btn.parentElement.remove();
-                    rowCount--;
-                }
-            }
+            const subSectionsDiv = document.getElementById('sub-sections');
+            subSectionsDiv.innerHTML = '';
+            subSectionsDiv.style.display = 'block';
 
-            function updateTableRows() {
-                const rowsDiv = document.getElementById('table-rows');
-                const rows = rowsDiv.getElementsByClassName('table-row');
-                for (let i = 0; i < rows.length; i++) {
-                    const inputs = rows[i].getElementsByClassName('table-cell-input');
-                    while (inputs.length > headerCount) {
-                        inputs[inputs.length - 1].remove();
-                    }
-                    while (inputs.length < headerCount) {
-                        const input = document.createElement('input');
-                        input.type = 'text';
-                        input.name = `table_data[${i}][]`;
-                        input.placeholder = `Cell ${inputs.length + 1}`;
-                        input.className = 'table-cell-input';
-                        rows[i].insertBefore(input, rows[i].lastElementChild);
-                    }
-                }
-            }
-
-            // Section Navigation
-            document.querySelectorAll('.section-btn').forEach(button => {
-                button.addEventListener('click', () => {
-                    const sectionId = parseInt(button.dataset.sectionId);
-                    document.querySelectorAll('.section-btn').forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-
-                    const subSectionsDiv = document.getElementById('sub-sections');
-                    subSectionsDiv.innerHTML = '';
-                    subSectionsDiv.style.display = 'block';
-
-                    // Fetch sub-sections for the selected main section
-                    const sections = <?php echo json_encode($sections); ?>;
-                    const selectedSection = sections.find(section => section.id === sectionId);
-                    if (selectedSection && selectedSection.sub_sections.length > 0) {
-                        selectedSection.sub_sections.forEach(sub => {
-                            const btn = document.createElement('button');
-                            btn.className = 'sub-section-btn';
-                            btn.dataset.sectionId = sub.id;
-                            btn.textContent = sub.name;
-                            btn.addEventListener('click', () => {
-                                document.querySelectorAll('.sub-section-btn').forEach(b => b.classList.remove('active'));
-                                btn.classList.add('active');
-                                filterContent([parseInt(sub.id)]);
-                            });
-                            subSectionsDiv.appendChild(btn);
-                        });
-                    }
-
-                    // Filter topics for the main section only (not sub-sections)
-                    filterContent([sectionId]);
+            // Fetch sub-sections for the selected main section
+            const sections = <?php echo json_encode($sections); ?>;
+            const selectedSection = sections.find(section => section.id === sectionId);
+            if (selectedSection && selectedSection.sub_sections.length > 0) {
+                selectedSection.sub_sections.forEach(sub => {
+                    const btn = document.createElement('button');
+                    btn.className = 'sub-section-btn';
+                    btn.dataset.sectionId = sub.id;
+                    btn.textContent = sub.name;
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.sub-section-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        filterContent([parseInt(sub.id)]);
+                    });
+                    subSectionsDiv.appendChild(btn);
                 });
-            });
-
-            // Set first section as active on load
-            const firstSectionBtn = document.querySelector('.section-btn[data-section-id]');
-            if (firstSectionBtn) {
-                firstSectionBtn.click();
+                // Set first sub-section as active
+                const firstSubSectionBtn = subSectionsDiv.querySelector('.sub-section-btn');
+                if (firstSubSectionBtn) {
+                    firstSubSectionBtn.classList.add('active');
+                    filterContent([parseInt(firstSubSectionBtn.dataset.sectionId)]);
+                }
+            } else {
+                filterContent([sectionId]);
             }
-
-            function filterContent(sectionIds) {
-                const topicsTitle = document.getElementById('topics-title');
-                const extinguisherList = document.getElementById('extinguisher-list');
-
-                // Filter topics and extinguishers
-                document.querySelectorAll('.topic-card').forEach(card => {
-                    const cardSectionId = parseInt(card.dataset.sectionId);
-                    card.style.display = sectionIds.includes(cardSectionId) ? 'block' : 'none';
-                    const sectionName = <?php echo json_encode(array_reduce($sections, function($carry, $section) {
-                        $carry[$section['id']] = $section['name'];
-                        foreach ($section['sub_sections'] as $sub) {
-                            $carry[$sub['id']] = $sub['name'];
-                        }
-                        return $carry;
-                    }, [])); ?>[sectionIds[0]] || 'Topics';
-                    topicsTitle.textContent = sectionName + ' Topics';
-                    // Show extinguishers only for Fire Safety (ID 5)
-                    extinguisherList.style.display = sectionIds.includes(5) ? 'block' : 'none';
-                });
-
-                // Hide user sections with no visible topics
-                document.querySelectorAll('.user-topics').forEach(userSection => {
-                    const visibleTopics = userSection.querySelectorAll('.topic-card[style="display: block;"]');
-                    userSection.style.display = visibleTopics.length > 0 ? 'block' : 'none';
-                });
-            }
-
-            window.addHeader = addHeader;
-            window.addRow = addRow;
-            window.removeRow = removeRow;
         });
+    });
+
+    // Set first section as active on load
+    const firstSectionBtn = document.querySelector('.section-btn[data-section-id]');
+    if (firstSectionBtn) {
+        firstSectionBtn.click();
+    }
+
+    function filterContent(sectionIds) {
+        const topicsTitle = document.getElementById('topics-title');
+        const extinguisherList = document.getElementById('extinguisher-list');
+
+        // Filter topics and extinguishers
+        document.querySelectorAll('.topic-card').forEach(card => {
+            const cardSectionId = parseInt(card.dataset.sectionId);
+            card.style.display = sectionIds.includes(cardSectionId) ? 'block' : 'none';
+            const sectionName = <?php echo json_encode(array_reduce($sections, function($carry, $section) {
+                $carry[$section['id']] = $section['name'];
+                foreach ($section['sub_sections'] as $sub) {
+                    $carry[$sub['id']] = $sub['name'];
+                }
+                return $carry;
+            }, [])); ?>[sectionIds[0]] || 'Topics';
+            topicsTitle.textContent = sectionName + ' Topics';
+            // Show extinguishers only for Fire Safety (ID 5)
+            extinguisherList.style.display = sectionIds.includes(5) ? 'block' : 'none';
+        });
+
+        // Hide user sections with no visible topics
+        document.querySelectorAll('.user-topics').forEach(userSection => {
+            const visibleTopics = userSection.querySelectorAll('.topic-card[style="display: block;"]');
+            userSection.style.display = visibleTopics.length > 0 ? 'block' : 'none';
+        });
+    }
+
+    window.addHeader = addHeader;
+    window.addRow = addRow;
+    window.removeRow = removeRow;
+});
     </script>
 </body>
 </html>

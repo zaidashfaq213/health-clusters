@@ -35,7 +35,7 @@ class Chat implements MessageComponentInterface {
         }
 
         // Store message in database
-        $stmt = $this->conn->prepare("INSERT INTO messages (sender_id, receiver_id, content, hospital_id) VALUES (?, ?, ?, ?)");
+        $stmt = $this->conn->prepare("INSERT INTO messages (sender_id, receiver_id, content, hospital_id) VALUES (?,  ?, ?, ?)");
         $stmt->bind_param("iisi", $sender_id, $receiver_id, $content, $hospital_id);
         if ($stmt->execute()) {
             $message_id = $this->conn->insert_id;

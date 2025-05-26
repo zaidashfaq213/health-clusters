@@ -15,11 +15,14 @@ if ($manager_id <= 0) {
     exit(json_encode([]));
 }
 
-$stmt = $conn->prepare("SELECT id as message_id, sender_id, receiver_id, content, file_path, created_at, is_read 
-                        FROM messages 
-                        WHERE ((sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)) 
-                        AND id > ? 
-                        ORDER BY created_at ASC");
+$stmt = $conn->prepare("
+    SELECT m.id as message_id, m.sender_id, m.receiver_id, m.content, m.file_path, m.created_at, m.is_read, u.username as sender_username
+    FROM messages m
+    JOIN users u ON m.sender_id = u.id
+    WHERE ((m.sender_id = ? AND m.receiver_id = ?) OR (m.sender_id = ? AND m.receiver_id = ?))
+    AND m.id > ?
+    ORDER BY m.created_at ASC
+");
 $stmt->bind_param("iiiii", $_SESSION['user_id'], $manager_id, $manager_id, $_SESSION['user_id'], $last_id);
 $stmt->execute();
 $messages = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
