@@ -978,14 +978,14 @@ p {
 .action-btn.view,
 .action-btn.edit,
 .action-btn.delete {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    border-radius: 8px;
-    font-weight: 500;
-    color: #ffffff;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+padding: 8px 16px;
+font-size: 0.9rem;
+border-radius: 8px;
+font-weight: 500;
+color: #ffffff;
+border: none;
+cursor: pointer;
+transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .action-btn.pin-btn {
@@ -1409,7 +1409,7 @@ footer p {
     .main-content {
         margin-left: 250px;
     }
-
+    
     .profile-picture-container {
         width: 70px;
         height: 70px;
